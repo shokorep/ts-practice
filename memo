@@ -1,0 +1,40 @@
+変数
+ts → 静的型付け
+js → 動的型付け
+
+js
+var x = 10;
+x = "hello";
+が可能
+
+tsはコンパイルエラーになる
+
+
+ES5 を指定してコンパイルする
+tsc -t es5 main.ts
+or
+tsc main.ts -t es5
+
+lesson18 コンパイル時にoutput fileを指定する
+tsc main.ts --out all.js
+ → main.tsファイルをコンパイルしてall.jsファイルを生成
+
+☆Error1
+ tsc -t es5 main.ts --out all.js --module amd
+ これで外部モジュールありでもコンパイルできるものの、、、
+ define("user", ["require", "exports"], function (require, exports) {
+^
+
+ReferenceError: define is not defined
+    at Object.<anonymous> (/Users/shokomiyagawa1/base/test/all.js:14:1)
+    at Module._compile (internal/modules/cjs/loader.js:955:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:991:10)
+    at Module.load (internal/modules/cjs/loader.js:811:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:723:14)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:1043:10)
+    at internal/main/run_main_module.js:17:11
+て言われるので...
+
+$ tsc -t es5 main.ts
+$ node main.js      
+これでいけた！！！　importでかけばOKらしい。

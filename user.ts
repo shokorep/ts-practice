@@ -1,5 +1,5 @@
- export module UserModule2 {
-     const name = "suzuki";
+  export module UserModule2 {
+     export const name = "suzuki";
      module AddressModule2 {
         const zip = "222-2222"
     }

@@ -348,8 +348,8 @@ console.log("addr.zip: ", addr.zip)
 // モジュールを外出しして読み込む際は /// 付けて↓のようにかけばOK
 // /// <reference path="user.ts" />
 // ☆Error1　end
-import * as usermodule2 from "./user";
-console.log("UserModule2.name: ", usermodule2)
+import { UserModule2 } from "./user";
+console.log("UserModule2.name: ", UserModule2.name)
 
 
 // lesson19 外部モジュール 
@@ -360,5 +360,19 @@ console.log("\nlesson19 外部モジュール")
     // export const zip = "111-1111"　←これだけ書く。
 //  }　←不要
 // ↑この中身をそのまま別ファイルにすれば良いが、
-// 今回は Node でよく使われる CommonJS形式でのコンパイルと、
-// RequireJSなどで使われる AMD と呼ばれるコンパイル方式を 2 つ使っていきたいので、2 つファイルを作成する
+// 今回は Node でよく使われる CommonJS形式でのコンパイルと、 →　user_common.ts
+// RequireJSなどで使われる AMD と呼ばれるコンパイル方式を 2 つ使っていきたいので、2 つファイルを作成する →　user_amd.ts
+
+// 呼び出しは下のように書く
+// commonjs形式 コマンドが必要なので一旦下２行コメントアウト
+// import User190 = require("./user_commonjs")
+// console.log("User190.name: ", User190.name)
+// commonjs形式のコンパイルは以下のコマンド
+// $tsc -t es5 main.ts -m commonjs
+
+// amd形式
+// import User191 = require("./user_amd")
+// console.log("User191.name: ",User191.name)
+// amd形式のコンパイルは以下のコマンド
+// $tsc -t es5 main.ts -m amd
+// 実行時エラーになるが、require("amd-loader");を付ければOKのようである。

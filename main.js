@@ -301,8 +301,8 @@ var lesson16_3 = new MyData_2({ a: 16, b: 20 }); // 引数にResult160のプロ�
 console.log("lesson16_3.getArray()", lesson16_3.getArray());
 var lesson16_4 = new MyData_2({ a: 15, b: 10, c: 'hello' });
 console.log("lesson16_4.getArray(): ", lesson16_4.getArray());
-// lesson17 内部モジュール 
-console.log("\nlesson17 内部モジュール");
+// lesson18 内部モジュール 
+console.log("\nlesson18 内部モジュール");
 // 大規模開発で有効な方法。コードを部品化してわかりやすく整理したり、変数名とかクラス名の衝突を避けたりできる。
 var UserModule1;
 (function (UserModule1) {
@@ -322,6 +322,28 @@ console.log("addr.zip: ", addr.zip);
 // ☆Error1　begin
 // モジュールを外出しして読み込む際は /// 付けて↓のようにかけばOK
 // /// <reference path="user.ts" />
-var usermodule2 = require("./user");
-console.log("UserModule2.name: ", usermodule2);
 // ☆Error1　end
+var user_1 = require("./user");
+console.log("UserModule2.name: ", user_1.UserModule2.name);
+// lesson19 外部モジュール 
+console.log("\nlesson19 外部モジュール");
+// 外部モジュールは、主に NodeJS だとか RequireJS というライブラリを使ったプロジェクトにおいて使われる
+// 外部モジュールは内部モジュールと違って、1 ファイルに 1 モジュール入れることになるので、module の外枠は不要。
+// export module AddressModule1 { ←不要
+// export const zip = "111-1111"　←これだけ書く。
+//  }　←不要
+// ↑この中身をそのまま別ファイルにすれば良いが、
+// 今回は Node でよく使われる CommonJS形式でのコンパイルと、 →　user_common.ts
+// RequireJSなどで使われる AMD と呼ばれるコンパイル方式を 2 つ使っていきたいので、2 つファイルを作成する →　user_amd.ts
+// 呼び出しは下のように書く
+// commonjs形式 コマンドが必要なので一旦下２行コメントアウト
+// import User190 = require("./user_commonjs")
+// console.log("User190.name: ", User190.name)
+// commonjs形式のコンパイルは以下のコマンド
+// $tsc -t es5 main.ts -m commonjs
+// amd形式
+// import User191 = require("./user_amd")
+// console.log("User191.name: ",User191.name)
+// amd形式のコンパイルは以下のコマンド
+// $tsc -t es5 main.ts -m amd
+// 実行時エラーになるが、require("amd-loader");を付ければOKのようである。

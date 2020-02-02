@@ -1,0 +1,1 @@
+export const name = "yamamoto from user_amd";
